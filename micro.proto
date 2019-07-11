@@ -1,0 +1,33 @@
+syntax = "proto3";
+package micro;
+message FooRequest{
+     int32 foo  =1 ;
+     repeated string bar=2;
+     message MapFieldEntry {
+          int32 key = 1;
+          string value = 2;
+    }
+     MapFieldEntry map=3;
+}
+
+
+message FooResponse{
+     int32 resFoo  =1 ;
+     repeated string resBar=2;
+     FooRequest req =3 ;
+     enum Corpus {
+        UNIVERSAL = 0;
+        WEB = 1;
+        IMAGES = 2;
+        LOCAL = 3;
+        NEWS = 4;
+        PRODUCTS = 5;
+        VIDEO = 6;
+  };
+     Corpus corp=4;
+}
+option py_generic_services = true;
+service SearchService {
+  rpc Search (FooRequest) returns (FooResponse);
+  rpc ToFro(stream FooRequest) returns (FooResponse);
+}

@@ -1,0 +1,5 @@
+celery[sqs]
+boto3
+protobuf
+grpcio==1.22.0
+grpcio-tools==1.22.0
